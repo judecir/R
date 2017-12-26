@@ -1,0 +1,136 @@
+#Treinamento R - Dia 01
+
+#Basicos
+#O R separa os decimais por "." e NAO por ",".
+#Use ?funcao para saber ver o help da funcao especifica. Ex: ?scan
+
+#R como calculadora
+2+3
+2^2 + 4*5/2
+
+sqrt(169) #raiz quadrada
+abs(-3) #valor absoluto ou modulo
+prod(10, 10, 10) #multiplicacao
+
+#Primeira variavel
+variavel <- 1
+var <- c(1,2) #comando c(1,2) concatena os elementos
+
+#lendo do console
+#Note que ao executar o comando, o console aceitara quantos elementos voce adicionar
+#Para parar a leitura, basta, quando o console pedir um numero, apertar ENTER 
+variavel <-  scan()
+
+#Estrutura condicional
+pH = 8
+if(pH<7){
+  cat("Solucao ácida") #atencao para indentacao, eh importante
+}else{
+  if(pH>7){
+    cat("Solucao básica")
+  }else{
+    cat("Solucao Neutra")
+  }
+}
+
+#Estrutura repeticao
+#for "tradicional", variavel em sequencia
+for (i in 1:5){
+  cat("Funcionario \t", i, "\n") #comando \t adicionar um tab e  \n pula linha 
+}
+
+#ordem descrescente
+for (i in 5:1){
+  cat("Funcionario \t", i, "\n") #comando \t adicionar um tab e  \n pula linha 
+}
+
+#note que vale para um conjunto de dados qualquer
+for(letra in letters[1:5]){
+  print(letra)
+}
+
+#Enquanto
+emailNaoLido = 10
+while(emailNaoLido > 0){
+  emailNaoLido = emailNaoLido - 1
+}
+
+#Repetir
+idade = 18
+repeat{
+  cat("Trabalhando com ", idade, "anos \n" )
+  idade = idade + 1
+  if(idade == 80){
+    cat("Aposentado!")
+    break #note que o comando break sai do laco de repeticao mais interno
+  } 
+}
+
+#Example
+example(plot)
+view(x) #note que nao funciona
+View(x)
+
+#Exercicio===============================
+
+#1) Analisar consumo cliente:
+inscricao <- "011" #ID
+nEconomias <- 2 #numero de familias
+volCal <- 20 #volume em metros cubicos
+
+volDia <- (1000/30)*volCal/(3*nEconomias) #transformando para l/hab/dia 
+
+if(volDia <80){ #identificando consumo baixo
+  cat("Inscricao: ", inscricao, " com consumo baixo")
+  
+}else{
+  cat("Inscricao: ", inscricao, "com consumo normal")
+  
+}
+
+#Calcular consumo medio diario em l por pessoa, sabendo que cada economia tem cerca de 3 pessoas
+#Se esse consumo for menor que 80, entao o consumo esta bem abaixo, emitir alerta!
+#Se nao, tudo ok com o cliente
+
+
+#2) Dada a longitude e latitude de tres clientes
+latA <- 3.11
+lonA <- 0.32
+
+latB <- 3.15
+lonB <- 0.60
+
+latC <- 3.80
+lonC <- 0.96
+
+#Indicar qual pont esta mais distante
+
+#Calculando as tres distancias euclidianas
+distAB <- sqrt((latA-latB)^2 + (lonA-lonB)^2)
+distAC <- sqrt((latA-latC)^2 + (lonA-lonC)^2)
+distBC <- sqrt((latB-latC)^2 + (lonB-lonC)^2)
+
+#obtendo a menor distancia
+menorDist <- min(distAB, distAC, distBC) #note que a funcao min retorna o menor valor do conjunto de dados
+
+#Reposta1: funciona se pelo menos a menor distancia for diferente das outras 
+if(menorDist == distAB){
+  cat("C eh o mais distante")
+}else{
+  if(menorDist == distAC){
+    cat("B eh o mais distante")
+  }else{
+    cat("A eh o mais distante")
+  }
+}
+
+#Resposta2: funciona independe dos valores
+if(distAB < distAC && distAB < distBC){
+  cat("C eh o mais distante")
+}else{
+  if(distAC < distAB && distAC < distBC){
+    cat("B eh o mais distante")
+  }else{
+    cat("A eh o mais distante")
+  }
+}

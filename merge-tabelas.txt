@@ -1,0 +1,25 @@
+AGOSTO <- read.table(file.choose(), header=TRUE, sep=";", dec=".") #ler arquivo agosto com 5 colunas
+SETEMBRO <- read.table(file.choose(), header=TRUE, sep=";", dec=".") #ler arquivo setembro com 2 colunas
+OUTUBRO <- read.table(file.choose(), header=TRUE, sep=";", dec=".") # #ler arquivo outubro com 2 colunas
+
+#merge com agosto e setembro 
+#ou seja, todas inscricoes presentes nos dois vao pertencer a clientes
+clientes <- merge(AGOSTO, SETEMBRO, by="INSCRICAO") 
+#merge com agosto, setembro e outubro
+#ou seja, todas inscricoes presentes nos tres vao pertencer a clientes
+clientes <- merge(clientes, OUTUBRO, by="INSCRICAO")
+
+#transformando em l/s
+clientes$VOL_CALCULADO.201708 <- clientes$VOL_CALCULADO.201708/31 / 24 / 3.6
+clientes$VOL_CALCULADO.201709 <- clientes$VOL_CALCULADO.201709/30 / 24 / 3.6
+clientes$VOL_CALCULADO.201710 <- clientes$VOL_CALCULADO.201710/31 / 24 / 3.6 
+
+#calculando a media
+medias <- (clientes$VOL_CALCULADO.201708+ clientes$VOL_CALCULADO.201709+clientes$VOL_CALCULADO.201710)/3
+
+#adicionando a coluna
+clientes <- data.frame(clientes, media=medias)
+
+#salando tabela
+write.table(clientes, file="C:/Users/404320/Documents/Projetos/Treinamento R/jessyca.csv", sep=";", dec=",", row.names=FALSE)
+
